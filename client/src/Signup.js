@@ -3,7 +3,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
-  Box,
   Typography,
   Button,
   FormControl,
@@ -58,7 +57,7 @@ const Login = (props) => {
               onClick={() => history.push("/login")}
               variant='contained'
               size='large'
-              className={classes.loginButton}
+              className={classes.redirect}
             >Login</Button>
           </Grid>
         </Grid>
@@ -111,7 +110,7 @@ const Login = (props) => {
                   color='primary'
                   className={classes.submit}>
                   Create
-            </Button>
+                </Button>
               </Grid>
             </form>
           </Grid>

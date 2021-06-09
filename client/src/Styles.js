@@ -59,7 +59,7 @@ const useStyles = makeStyles({
     formMessage: {
         fontWeight: 900,
     },
-    loginButton: {
+    redirect: {
         backgroundColor: 'white',
         boxShadow: '0 0 10px 4px rgba(0, 0, 0, 0.1)',
         color: '#3A8DFF',
@@ -69,7 +69,7 @@ const useStyles = makeStyles({
         alignSelf: 'center'
     },
     label: {
-        color: 'rgba(0, 0, 0, 0.5)',
+        color: 'rgba(0, 0, 0, 0.3)',
     }
 })
 

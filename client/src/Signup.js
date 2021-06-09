@@ -47,12 +47,18 @@ const Login = (props) => {
         <HomeSideBanner />
       </Hidden>
       <Grid item xs={12} sm={8} md={6} style={{ padding: '20px' }}>
-        <Grid>
-          <Typography>Already have an account?</Typography>
-          <Grid container item>
+        <Grid container spacing={4} direction='row' justify='flex-end' alignItems='center'>
+          <Grid item>
+            <Typography
+              className={classes.label}>Already have an account?
+            </Typography>
+          </Grid>
+          <Grid item>
             <Button
               onClick={() => history.push("/login")}
               variant='contained'
+              size='large'
+              className={classes.loginButton}
             >Login</Button>
           </Grid>
         </Grid>

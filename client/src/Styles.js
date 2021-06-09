@@ -58,6 +58,18 @@ const useStyles = makeStyles({
     },
     formMessage: {
         fontWeight: 900,
+    },
+    loginButton: {
+        backgroundColor: 'white',
+        boxShadow: '0 0 10px 4px rgba(0, 0, 0, 0.1)',
+        color: '#3A8DFF',
+        margin: '4px',
+        width: '180px',
+        height: '60px',
+        alignSelf: 'center'
+    },
+    label: {
+        color: 'rgba(0, 0, 0, 0.5)',
     }
 })
 

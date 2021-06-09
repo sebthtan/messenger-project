@@ -9,3 +9,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.login-signup {
+  width: 40vw;
+}
+
+.logo {
+  width: auto;
+  padding-bottom: 70px;
+}
+
+@media only screen and (max-width: 600px) {
+  form,form * {
+    width: 100%;
+  }
+}

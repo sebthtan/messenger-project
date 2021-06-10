@@ -35,12 +35,12 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container component='main'>
+    <Grid container className={classes.main}>
       <Hidden xsDown>
         <HomeSideBanner />
       </Hidden>
-      <Grid item xs={12} sm={8} md={6} style={{ padding: '20px' }}>
-        <Grid container spacing={4} direction='row' justify='flex-end' alignItems='center'>
+      <Grid item xs={12} sm={8} md={7} className={classes.page}>
+        <Grid container spacing={4} className={classes.redirectHeader}>
           <Grid item>
             <Typography
               className={classes.label}>Already have an account?
@@ -58,7 +58,7 @@ const Login = (props) => {
         <Grid container direction='column' className={classes.root}>
           <Grid container direction='column' className={classes.form}>
             <Typography variant="h4" className={classes.formMessage}>Create an account.</Typography>
-            <form onSubmit={handleRegister} className='login-signup'>
+            <form onSubmit={handleRegister} className={classes.loginSignup}>
               <Grid className={classes.xcentered}>
                 <FormControl margin='normal' className={classes.full}>
                   <TextField

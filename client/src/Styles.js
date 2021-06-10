@@ -12,9 +12,10 @@ const useStyles = makeStyles({
         alignContent: 'center',
         justifySelf: 'center',
         justifyContent: 'center',
+        width: '80%',
     },
     submit: {
-        margin: '20px 4px',
+        marginTop: '40px',
         width: '180px',
         height: '60px',
         alignSelf: 'center'
@@ -55,9 +56,13 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '100%',
     },
     formMessage: {
         fontWeight: 900,
+        ['@media (max-width:600px)']: {
+            textAlign: 'center',
+        },
     },
     redirect: {
         backgroundColor: 'white',
@@ -70,6 +75,24 @@ const useStyles = makeStyles({
     },
     label: {
         color: 'rgba(0, 0, 0, 0.3)',
+    },
+    page: {
+        padding: '40px',
+    },
+    main: {
+        width: '100vw',
+    },
+    loginSignup: {
+        width: '100%',
+    },
+    redirectHeader: {
+        alignItems: 'center',
+        ['@media (max-width:600px)']: {
+            justifyContent: 'center',
+        },
+        ['@media (min-width:600px)']: {
+            justifyContent: 'flex-end',
+        }
     }
 })
 

@@ -8,6 +8,8 @@ import {
   FormControl,
   TextField,
   Hidden,
+  Link,
+  InputAdornment,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import HomeSideBanner from './components/HomeSideBanner/HomeSideBanner'
@@ -35,8 +37,8 @@ const Login = (props) => {
       <Hidden xsDown>
         <HomeSideBanner />
       </Hidden>
-      <Grid item xs={12} sm={8} md={6} style={{ padding: '20px' }}>
-        <Grid container spacing={4} direction='row' justify='flex-end' alignItems='center'>
+      <Grid item xs={12} sm={8} md={7} className={classes.page}>
+        <Grid container spacing={4} className={classes.redirectHeader}>
           <Grid item>
             <Typography
               className={classes.label}>Don't have an account?
@@ -53,8 +55,10 @@ const Login = (props) => {
         </Grid>
         <Grid container direction='column' className={classes.root}>
           <Grid container direction='column' className={classes.form}>
-            <Typography variant="h4" className={classes.formMessage}>Welcome back!</Typography>
-            <form onSubmit={handleLogin} className='login-signup'>
+            <Grid container>
+              <Typography variant="h4" className={classes.formMessage}>Welcome back!</Typography>
+            </Grid>
+            <form onSubmit={handleLogin} className={classes.loginSignup}>
               <Grid className={classes.xcentered}>
                 <FormControl margin='normal' className={classes.full}>
                   <TextField
@@ -74,6 +78,15 @@ const Login = (props) => {
                     type="password"
                     name="password"
                     className={classes.input}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment component={Link} position="start">
+                          <Link href="#" color="primary">
+                            {"Forgot?"}
+                          </Link>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </FormControl>
               </Grid>
@@ -82,7 +95,8 @@ const Login = (props) => {
                   variant="contained"
                   size="large"
                   color='primary'
-                  className={classes.submit}>
+                  className={classes.submit}
+                >
                   Login
                 </Button>
               </Grid>

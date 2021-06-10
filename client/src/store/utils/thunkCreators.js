@@ -8,6 +8,7 @@ import {
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
+// REMOVE WHEN COOKIES IMPLEMENTED
 axios.interceptors.request.use(async function (config) {
   const token = await localStorage.getItem("messenger-token");
   config.headers["x-access-token"] = token;
@@ -80,6 +81,7 @@ export const fetchConversations = () => async (dispatch) => {
 
 const saveMessage = async (body) => {
   const { data } = await axios.post("/api/messages", body);
+  console.log(data)
   return data;
 };
 
@@ -93,9 +95,9 @@ const sendMessage = (data, body) => {
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => (dispatch) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = saveMessage(body);
+    const data = await saveMessage(body);
 
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));

@@ -41,73 +41,59 @@ const Login = (props) => {
       </Hidden>
       <Grid item xs={12} sm={8} md={7} className={classes.page}>
         <Grid container spacing={4} className={classes.redirectHeader}>
-          <Grid item>
-            <Typography
-              className={classes.label}>Already have an account?
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() => history.push("/login")}
-              variant='contained'
-              size='large'
-              className={classes.redirect}
-            >Login</Button>
-          </Grid>
+          <Typography
+            className={classes.label}>Already have an account?
+          </Typography>
+          <Button
+            onClick={() => history.push("/login")}
+            variant='contained'
+            size='large'
+            className={classes.redirect}
+          >Login</Button>
         </Grid>
         <Grid container direction='column' className={classes.root}>
-          <Grid container direction='column' className={classes.form}>
-            <Typography variant="h4" className={classes.formMessage}>Create an account.</Typography>
-            <form onSubmit={handleRegister} className={classes.loginSignup}>
-              <Grid className={classes.xcentered}>
-                <FormControl margin='normal' className={classes.full}>
-                  <TextField
-                    aria-label="username"
-                    label="Username"
-                    name="username"
-                    type="text"
-                    className={classes.input}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid className={classes.xcentered}>
-                <FormControl margin='normal' className={classes.full}>
-                  <TextField
-                    label="E-mail address"
-                    aria-label="e-mail address"
-                    type="email"
-                    name="email"
-                    className={classes.input}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid className={classes.xcentered}>
-                <FormControl margin='normal' className={classes.full} error={!!formErrorMessage.confirmPassword}>
-                  <TextField
-                    aria-label="password"
-                    label="Password"
-                    type="password"
-                    inputProps={{ minLength: 6 }}
-                    name="password"
-                    className={classes.input}
-                  />
-                  <FormHelperText>
-                    {formErrorMessage.confirmPassword}
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid className={classes.xcentered}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  color='primary'
-                  className={classes.submit}>
-                  Create
-                </Button>
-              </Grid>
-            </form>
-          </Grid>
+          <Typography variant="h4" className={classes.formMessage}>Create an account.</Typography>
+          <form onSubmit={handleRegister} className={classes.loginSignup}>
+            <FormControl margin='normal' className={classes.full}>
+              <TextField
+                aria-label="username"
+                label="Username"
+                name="username"
+                type="text"
+                className={classes.input}
+              />
+            </FormControl>
+            <FormControl margin='normal' className={classes.full}>
+              <TextField
+                label="E-mail address"
+                aria-label="e-mail address"
+                type="email"
+                name="email"
+                className={classes.input}
+              />
+            </FormControl>
+            <FormControl margin='normal' className={classes.full} error={!!formErrorMessage.confirmPassword}>
+              <TextField
+                aria-label="password"
+                label="Password"
+                type="password"
+                inputProps={{ minLength: 6 }}
+                name="password"
+                className={classes.input}
+              />
+              <FormHelperText>
+                {formErrorMessage.confirmPassword}
+              </FormHelperText>
+            </FormControl>
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              color='primary'
+              className={classes.submit}>
+              Create
+            </Button>
+          </form>
         </Grid>
       </Grid>
     </Grid>

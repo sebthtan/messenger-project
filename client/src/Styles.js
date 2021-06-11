@@ -6,14 +6,6 @@ const useStyles = makeStyles({
         height: '80vh',
         justifyContent: 'center',
     },
-    form: {
-        alignSelf: 'center',
-        height: '100%',
-        alignContent: 'center',
-        justifySelf: 'center',
-        justifyContent: 'center',
-        width: '80%',
-    },
     submit: {
         marginTop: '40px',
         width: '180px',
@@ -52,12 +44,6 @@ const useStyles = makeStyles({
     full: {
         width: '100%'
     },
-    xcentered: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-    },
     formMessage: {
         fontWeight: 900,
         ['@media (max-width:600px)']: {
@@ -68,29 +54,36 @@ const useStyles = makeStyles({
         backgroundColor: 'white',
         boxShadow: '0 0 10px 4px rgba(0, 0, 0, 0.1)',
         color: '#3A8DFF',
-        margin: '4px',
+        margin: '10px',
         width: '180px',
         height: '60px',
         alignSelf: 'center'
     },
     label: {
         color: 'rgba(0, 0, 0, 0.3)',
+        margin: '10px',
     },
     page: {
-        padding: '40px',
+        padding: '40px 40px 40px 10vw',
     },
     main: {
         width: '100vw',
     },
     loginSignup: {
-        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '80%',
+        ['@media (max-width:750px)']: {
+            width: '100%',
+        },
     },
     redirectHeader: {
         alignItems: 'center',
-        ['@media (max-width:600px)']: {
+        ['@media (max-width:750px)']: {
+            flexDirection: 'column',
             justifyContent: 'center',
         },
-        ['@media (min-width:600px)']: {
+        ['@media (min-width:750px)']: {
             justifyContent: 'flex-end',
         }
     },

@@ -9,12 +9,3 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-.login-signup {
-  width: 40vw;
-}
-
-.logo {
-  width: auto;
-  padding-bottom: 70px;
-}

@@ -93,6 +93,10 @@ const useStyles = makeStyles({
         ['@media (min-width:600px)']: {
             justifyContent: 'flex-end',
         }
+    },
+    logo: {
+        width: 'auto',
+        paddingBottom: '70px',
     }
 })
 

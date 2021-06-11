@@ -16,9 +16,7 @@ router.post("/", async (req, res, next) => {
     if (conversationId) {
       const conversation = await Conversation.findOne({
         where: {
-          [Op.or]: {
-            id: conversationId
-          }
+          id: conversationId
         }
       })
 

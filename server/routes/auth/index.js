@@ -28,7 +28,7 @@ router.post("/register", async (req, res, next) => {
     );
     res.status(202)
       .cookie('token', token, {
-        expires: new Date(Date.now() + 86400),
+        expires: new Date(Math.floor(Date.now() / 1000) + 86400),
         httpOnly: true,
       })
       .send({ ...user.dataValues })
@@ -68,7 +68,7 @@ router.post("/login", async (req, res, next) => {
       );
       res.status(202)
         .cookie('token', token, {
-          expires: new Date(Date.now() + 86400),
+          maxAge: 86400000,
           httpOnly: true,
         })
         .send({ ...user.dataValues })
@@ -79,7 +79,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.delete("/logout", (req, res, next) => {
-  res.clearCookie('token', { domain: 'localhost', path: '/' })
+  res.clearCookie('token')
   res.sendStatus(204);
 });
 

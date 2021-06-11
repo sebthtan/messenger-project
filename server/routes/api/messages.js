@@ -1,9 +1,6 @@
 const router = require("express").Router();
 const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
-const csrf = require('csurf')
-
-// const csrfProtection = csrf({ cookie: true })
 
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
 router.post("/", /*csrfProtection,*/ async (req, res, next) => {

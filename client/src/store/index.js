@@ -33,4 +33,3 @@ const store = createStore(rootReducer, composeEnhancers(
 ))
 
 export default store
-// export default createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));

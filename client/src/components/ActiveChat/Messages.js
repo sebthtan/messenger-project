@@ -18,11 +18,10 @@ const styles = {
 const Messages = (props) => {
   const { classes } = props
   const { messages, otherUser, userId } = props;
-  const sortedMessages = useMemo(() => messages.sort((a, b) => moment(a.createdAt).diff(moment(b.createdAt))), [messages])
 
   return (
     <Box className={classes.root}>
-      {sortedMessages.map((message) => {
+      {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
         return message.senderId === userId ? (

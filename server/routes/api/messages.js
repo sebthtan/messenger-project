@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
 
     // if we already know conversation id, we can save time and just add it to message and return
     if (conversationId) {
-      const conversation = await Conversation.findConversation({
+      const conversation = await Conversation.findOne({
         where: {
           [Op.or]: {
             id: conversationId

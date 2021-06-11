@@ -41,23 +41,23 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    // expects username and password in req.body
-    const { username, password } = req.body;
-    if (!username || !password)
-      return res.status(400).json({ error: "Username and password required" });
+    // expects email and password in req.body
+    const { email, password } = req.body;
+    if (!email || !password)
+      return res.status(400).json({ error: "E-mail address and password required" });
 
     const user = await User.findOne({
       where: {
-        username: req.body.username,
+        email: req.body.email,
       },
     });
 
     if (!user) {
-      console.log({ error: `No user found for username: ${username}` });
-      res.status(401).json({ error: "Wrong username and/or password" });
+      console.log({ error: `No user found for e-mail address: ${email}` });
+      res.status(401).json({ error: "Wrong e-mail and/or password" });
     } else if (!user.correctPassword(password)) {
-      console.log({ error: "Wrong username and/or password" });
-      res.status(401).json({ error: "Wrong username and/or password" });
+      console.log({ error: "Wrong e-mail and/or password" });
+      res.status(401).json({ error: "Wrong e-mail and/or password" });
     } else {
       const token = jwt.sign(
         { id: user.dataValues.id },

@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Box } from "@material-ui/core";
+import { withStyles } from '@material-ui/core/styles'
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
 
+const styles = {
+  root: {
+    overflowY: 'auto',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    },
+    height: '70vh',
+  }
+};
+
 const Messages = (props) => {
+  const { classes } = props
   const { messages, otherUser, userId } = props;
 
   return (
-    <Box>
+    <Box className={classes.root}>
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
@@ -21,4 +34,4 @@ const Messages = (props) => {
   );
 };
 
-export default Messages;
+export default withStyles(styles)(Messages);

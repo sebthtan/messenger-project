@@ -14,7 +14,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     "&:hover": {
-      cursor: "grab",
+      cursor: "pointer",
+      backgroundColor: "rgba(0, 0, 0, 0.03)"
     },
   },
 };

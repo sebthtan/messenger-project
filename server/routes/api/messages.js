@@ -3,7 +3,7 @@ const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
 
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
-router.post("/", async (req, res, next) => {
+router.post("/", /*csrfProtection,*/ async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);

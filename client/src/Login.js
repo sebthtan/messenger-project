@@ -70,7 +70,7 @@ const Login = (props) => {
                 className={classes.input}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment component={Link} position="start">
+                    <InputAdornment component={'div'} position="start">
                       <Link href="#" color="primary">
                         {"Forgot?"}
                       </Link>

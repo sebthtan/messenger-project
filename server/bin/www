@@ -11,6 +11,7 @@ const { app, sessionStore } = require("../app");
 const http = require("http");
 const db = require("../db");
 const onlineUsers = require("../onlineUsers");
+const jwt = require("jsonwebtoken");
 
 /**
  * Get port from environment and store in Express.
@@ -29,9 +30,29 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces, and sync database.
  */
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  autoConnect: false,
+});
+
+/* - Socket Middleware - */
+io.use((socket, next) => {
+  const token = socket.handshake.headers.cookie.split('token=')[1]
+
+  if (token.length) {
+    jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
+      if (err) {
+        return next(new Error('Authentication error'))
+      }
+      socket.userId = decoded.id
+      return next()
+    })
+  } else {
+    return next(new Error('Authentication error'))
+  }
+})
 
 io.on("connection", (socket) => {
+  socket.join(socket.userId)
   socket.on("go-online", (id) => {
     if (!onlineUsers.includes(id)) {
       onlineUsers.push(id);
@@ -41,7 +62,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new-message", (data) => {
-    socket.broadcast.emit("new-message", {
+    socket.to(data.recipientId).emit("new-message", {
       message: data.message,
       sender: data.sender,
     });
@@ -52,6 +73,7 @@ io.on("connection", (socket) => {
       userIndex = onlineUsers.indexOf(id);
       onlineUsers.splice(userIndex, 1);
       socket.broadcast.emit("remove-offline-user", id);
+      socket.disconnect()
     }
   });
 });

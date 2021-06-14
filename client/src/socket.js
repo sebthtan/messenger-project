@@ -6,7 +6,9 @@ import {
   addOnlineUser,
 } from "./store/conversations";
 
-const socket = io(window.location.origin);
+// autoConnect set to false so that the connection is not established immediately.
+// Connection will be manually established using socket.connect() in login/register thunks.
+const socket = io(window.location.origin, { autoConnect: false });
 
 socket.on("connect", () => {
   console.log("connected to server");

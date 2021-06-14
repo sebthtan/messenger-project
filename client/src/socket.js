@@ -23,4 +23,8 @@ socket.on("connect", () => {
   });
 });
 
+socket.onAny((event, ...args) => {
+  console.log(event, args);
+});
+
 export default socket;

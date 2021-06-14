@@ -46,6 +46,7 @@ const useStyles = makeStyles({
     },
     formMessage: {
         fontWeight: 900,
+        // eslint-disable-next-line
         ['@media (max-width:600px)']: {
             textAlign: 'center',
         },
@@ -73,16 +74,19 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         width: '80%',
+        // eslint-disable-next-line
         ['@media (max-width:750px)']: {
             width: '100%',
         },
     },
     redirectHeader: {
         alignItems: 'center',
+        // eslint-disable-next-line
         ['@media (max-width:750px)']: {
             flexDirection: 'column',
             justifyContent: 'center',
         },
+        // eslint-disable-next-line
         ['@media (min-width:750px)']: {
             justifyContent: 'flex-end',
         }

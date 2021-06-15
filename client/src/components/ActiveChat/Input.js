@@ -17,24 +17,28 @@ const styles = {
   },
 };
 
+// TO-DO: refactor to use functional components and react hooks
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
+      typing: false,
+      timeout: "",
     };
-    this.typing = false
-    this.timeout = ''
   }
 
   handleChange = (event) => {
+    const timer = setTimeout(this.typingTimeout, 3000)
     this.setState({
       text: event.target.value,
+      typing: true,
+      timeout: timer,
     });
-    this.typing = true
-    this.props.changeTypingStatus(this.props.user, this.props.otherUser.id, this.typing)
-    clearTimeout(this.timeout)
-    this.timeout = setTimeout(this.typingTimeout, 3000)
+    this.props.changeTypingStatus(this.props.user, this.props.otherUser.id, this.state.typing)
+    this.setState({
+      timeout: clearTimeout(this.state.timeout),
+    })
   };
 
   handleSubmit = async (event) => {
@@ -53,8 +57,8 @@ class Input extends Component {
   };
 
   typingTimeout = () => {
-    this.typing = false
-    this.props.changeTypingStatus(this.props.user, this.props.otherUser.id, this.typing)
+    this.setState({ typing: false })
+    this.props.changeTypingStatus(this.props.user, this.props.otherUser.id, this.state.typing)
   }
 
   render() {
@@ -88,8 +92,8 @@ const mapDispatchToProps = (dispatch) => {
     postMessage: (message) => {
       dispatch(postMessage(message));
     },
-    changeTypingStatus: (sender, recipientId, boolean) =>
-      dispatch(changeTypingStatus(sender, recipientId, boolean))
+    changeTypingStatus: (sender, recipientId, isTyping) =>
+      dispatch(changeTypingStatus(sender, recipientId, isTyping))
 
   };
 };

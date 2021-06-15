@@ -62,10 +62,10 @@ export const clearSearchedUsers = () => {
   };
 };
 
-export const displayTypingStatus = (sender, boolean) => {
+export const displayTypingStatus = (sender, isTyping) => {
   return {
     type: SET_TYPING_STATUS,
-    payload: { sender, boolean }
+    payload: { sender, isTyping }
   }
 }
 

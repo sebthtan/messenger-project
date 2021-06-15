@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
   socket.on('typing-status', (data) => {
     socket.to(data.recipientId).emit('typing-status', {
       sender: data.sender,
-      boolean: data.boolean
+      isTyping: data.isTyping
     })
   })
 });

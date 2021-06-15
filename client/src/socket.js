@@ -27,7 +27,7 @@ socket.on("connect", () => {
   });
 
   socket.on('typing-status', (data) => {
-    store.dispatch(displayTypingStatus(data.sender, data.boolean))
+    store.dispatch(displayTypingStatus(data.sender, data.isTyping))
   })
 });
 

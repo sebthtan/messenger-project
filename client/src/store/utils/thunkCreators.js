@@ -106,11 +106,11 @@ export const postMessage = (body) => async (dispatch) => {
   }
 };
 
-export const changeTypingStatus = (sender, recipientId, boolean) => async (dispatch) => {
+export const changeTypingStatus = (sender, recipientId, isTyping) => async (dispatch) => {
   socket.emit('typing-status', {
     sender,
     recipientId,
-    boolean,
+    isTyping,
   })
 }
 

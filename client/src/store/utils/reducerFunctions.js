@@ -88,12 +88,12 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 };
 
 export const changeConvoTypingStatus = (state, payload) => {
-  const { sender, boolean } = payload
+  const { sender, isTyping } = payload
   const newState = [...state]
   const targetConvo = newState.find(convo => {
     return convo.otherUser.id === sender.id
   })
-  targetConvo.typingStatus = boolean
+  targetConvo.typingStatus = isTyping
 
   return newState
 }

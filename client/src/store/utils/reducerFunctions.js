@@ -1,3 +1,8 @@
+export const setConvosToStore = (conversations) => {
+  conversations.forEach(convo => convo.typingStatus = false)
+  return conversations
+}
+
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -81,3 +86,14 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const changeConvoTypingStatus = (state, payload) => {
+  const { sender, boolean } = payload
+  const newState = [...state]
+  const targetConvo = newState.find(convo => {
+    return convo.otherUser.id === sender.id
+  })
+  targetConvo.typingStatus = boolean
+
+  return newState
+}

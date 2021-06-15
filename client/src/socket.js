@@ -4,6 +4,7 @@ import {
   setNewMessage,
   removeOfflineUser,
   addOnlineUser,
+  displayTypingStatus,
 } from "./store/conversations";
 
 // autoConnect set to false so that the connection is not established immediately.
@@ -20,9 +21,15 @@ socket.on("connect", () => {
   socket.on("remove-offline-user", (id) => {
     store.dispatch(removeOfflineUser(id));
   });
+
   socket.on("new-message", (data) => {
     store.dispatch(setNewMessage(data.message, data.sender));
+    console.log(data)
   });
+
+  socket.on('typing-status', (data) => {
+    store.dispatch(displayTypingStatus(data.sender, data.boolean))
+  })
 });
 
 socket.onAny((event, ...args) => {

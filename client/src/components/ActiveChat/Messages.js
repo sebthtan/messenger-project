@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from 'react-redux'
 import { Box } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles'
-import { SenderBubble, OtherUserBubble } from "../ActiveChat";
+import { SenderBubble, OtherUserBubble, } from "../ActiveChat";
 import moment from "moment";
+import TypingIndicator from './TypingIndicator'
 
 const styles = {
   root: {
@@ -16,6 +18,8 @@ const styles = {
 };
 
 const Messages = (props) => {
+  const typingStatus = useSelector(state => state.conversations.find(
+    (conversation) => conversation.otherUser.username === state.activeConversation).typingStatus)
   const { classes } = props
   const { messages, otherUser, userId } = props;
 
@@ -30,6 +34,9 @@ const Messages = (props) => {
           <OtherUserBubble key={message.id} text={message.text} time={time} otherUser={otherUser} />
         );
       })}
+      {typingStatus &&
+        <TypingIndicator otherUser={otherUser} />
+      }
     </Box>
   );
 };

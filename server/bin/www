@@ -76,6 +76,13 @@ io.on("connection", (socket) => {
       socket.disconnect()
     }
   });
+
+  socket.on('typing-status', (data) => {
+    socket.to(data.recipientId).emit('typing-status', {
+      sender: data.sender,
+      boolean: data.boolean
+    })
+  })
 });
 
 sessionStore

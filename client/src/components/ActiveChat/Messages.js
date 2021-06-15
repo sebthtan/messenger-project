@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector } from 'react-redux'
 import { Box } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles'
@@ -22,6 +22,11 @@ const Messages = (props) => {
     (conversation) => conversation.otherUser.username === state.activeConversation).typingStatus)
   const { classes } = props
   const { messages, otherUser, userId } = props;
+  const bottom = useRef(null)
+
+  useEffect(() => {
+    bottom.current.scrollIntoView({ behavior: 'smooth' })
+  }, [typingStatus, messages.length])
 
   return (
     <Box className={classes.root}>
@@ -37,6 +42,7 @@ const Messages = (props) => {
       {typingStatus &&
         <TypingIndicator otherUser={otherUser} />
       }
+      <div ref={bottom}></div>
     </Box>
   );
 };

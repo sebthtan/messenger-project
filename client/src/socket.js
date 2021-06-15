@@ -24,16 +24,11 @@ socket.on("connect", () => {
 
   socket.on("new-message", (data) => {
     store.dispatch(setNewMessage(data.message, data.sender));
-    console.log(data)
   });
 
   socket.on('typing-status', (data) => {
     store.dispatch(displayTypingStatus(data.sender, data.boolean))
   })
-});
-
-socket.onAny((event, ...args) => {
-  console.log(event, args);
 });
 
 export default socket;

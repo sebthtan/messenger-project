@@ -1,6 +1,20 @@
-export const setConvosToStore = (conversations) => {
-  conversations.forEach(convo => convo.typingStatus = false)
-  return conversations
+export const setConvosToStore = (state, conversations) => {
+  const newState = state.slice()
+  const convosMap = {}
+
+  newState.forEach(convo => {
+    convosMap[convo.id] = convo
+  })
+
+  conversations.forEach(convo => {
+    if (Object.keys(convosMap).includes(convo.id.toString())) {
+      newState[newState.indexOf(convosMap[convo.id])] = convo
+    } else {
+      newState.push(convo)
+    }
+  })
+
+  return newState
 }
 
 export const addMessageToStore = (state, payload) => {

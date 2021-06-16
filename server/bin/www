@@ -30,10 +30,11 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces, and sync database.
  */
 
+// TO-DO
 const io = require("socket.io")(server, {
   autoConnect: false,
   cors: {
-    origin: "https://example.com",
+    origin: '*',
     methods: ["GET", "POST"],
   },
 });

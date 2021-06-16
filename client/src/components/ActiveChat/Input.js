@@ -53,7 +53,9 @@ class Input extends Component {
     await this.props.postMessage(reqBody);
     this.setState({
       text: "",
+      timeout: clearTimeout(this.state.timeout),
     });
+    this.typingTimeout()
   };
 
   typingTimeout = () => {

@@ -103,11 +103,13 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 
 export const changeConvoTypingStatus = (state, payload) => {
   const { sender, isTyping } = payload
-  const newState = [...state]
-  const targetConvo = newState.find(convo => {
-    return convo.otherUser.id === sender.id
+  return state.map(convo => {
+    if (convo.otherUser.id === sender.id) {
+      const convoCopy = { ...convo }
+      convoCopy.typingStatus = isTyping
+      return convoCopy
+    } else {
+      return convo
+    }
   })
-  targetConvo.typingStatus = isTyping
-
-  return newState
 }

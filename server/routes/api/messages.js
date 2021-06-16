@@ -4,7 +4,7 @@ const onlineUsers = require("../../onlineUsers");
 const { Op } = require('sequelize')
 
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
-router.post("/", /*csrfProtection,*/ async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);
@@ -56,5 +56,34 @@ router.post("/", /*csrfProtection,*/ async (req, res, next) => {
     next(error);
   }
 });
+
+router.put('/', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+    const currentUserId = req.user.id;
+    const { senderId } = req.body;
+    const convo = await Conversation.findConversation(currentUserId, senderId)
+
+    await Message.update(
+      {
+        unread: false
+      }, {
+      where: {
+        [Op.and]: {
+          senderId: senderId,
+          conversationId: convo.id
+        }
+      }
+    }
+    )
+
+    res.sendStatus(204)
+
+  } catch (e) {
+    next(e)
+  }
+})
 
 module.exports = router;

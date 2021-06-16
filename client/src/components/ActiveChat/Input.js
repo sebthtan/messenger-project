@@ -33,11 +33,11 @@ class Input extends Component {
     this.setState({
       text: event.target.value,
       typing: true,
-      timeout: timer,
+      timeout: clearTimeout(this.state.timeout),
     });
     this.props.changeTypingStatus(this.props.user, this.props.otherUser.id, this.state.typing)
     this.setState({
-      timeout: clearTimeout(this.state.timeout),
+      timeout: timer,
     })
   };
 

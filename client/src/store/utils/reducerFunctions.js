@@ -2,7 +2,8 @@ export const setConvosToStore = (state, conversations) => {
   const convosMap = {}
   const newState = state.map(convo => {
     convosMap[convo.id] = convo
-    return convo
+    const convoCopy = { ...convo }
+    return convoCopy
   })
 
   conversations.forEach(convo => {

@@ -24,7 +24,7 @@ router.post("/", async (req, res, next) => {
         return res.sendStatus(401)
       }
 
-      const message = await Message.create({ senderId, text, conversationId });
+      const message = await Message.create({ senderId, text, conversationId, unread: true });
       return res.json({ message, sender });
     }
     // if we don't have conversation id, find a conversation to make sure it doesn't already exist
@@ -50,6 +50,7 @@ router.post("/", async (req, res, next) => {
       senderId,
       text,
       conversationId: conversation.id,
+      unread: true,
     });
     res.json({ message, sender });
   } catch (error) {
@@ -63,8 +64,8 @@ router.put('/', async (req, res, next) => {
       return res.sendStatus(401);
     }
     const currentUserId = req.user.id;
-    const { senderId } = req.body;
-    const convo = await Conversation.findConversation(currentUserId, senderId)
+    const { otherUserId } = req.body;
+    const convo = await Conversation.findConversation(currentUserId, otherUserId)
 
     await Message.update(
       {
@@ -72,10 +73,10 @@ router.put('/', async (req, res, next) => {
       }, {
       where: {
         [Op.and]: {
-          senderId: senderId,
+          senderId: otherUserId,
           conversationId: convo.id
         }
-      }
+      },
     }
     )
 

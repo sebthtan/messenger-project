@@ -3,6 +3,7 @@ import { Box } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { withStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
+import { markAsRead } from '../../store/utils/thunkCreators'
 import { connect } from "react-redux";
 
 const styles = {
@@ -50,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
     setActiveChat: (id) => {
       dispatch(setActiveChat(id));
     },
+    markAsRead: (otherUserId) => {
+      dispatch(markAsRead(otherUserId))
+    }
   };
 };
 

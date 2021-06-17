@@ -73,8 +73,10 @@ router.get("/", async (req, res, next) => {
       conversations[i] = convoJSON;
 
       // set property for notification count
-      const unreadMessages = convoJSON.messages.filter(message => message.senderId === convoJSON.otherUser.id && !message.unread)
+      const unreadMessages = convoJSON.messages.filter(message => message.senderId === convoJSON.otherUser.id && message.unread)
       convoJSON.unreadCounter = unreadMessages.length
+
+      convoJSON.active = false
     }
 
     // sort conversations so that most recently modified conversations appear at the top

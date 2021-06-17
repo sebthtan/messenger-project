@@ -9,6 +9,7 @@ import {
   TextField,
   Hidden,
   Link,
+  Box,
   InputAdornment,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
@@ -70,7 +71,7 @@ const Login = (props) => {
                 className={classes.input}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment component={'div'} position="start">
+                    <InputAdornment component={Box} position="start">
                       <Link href="#" color="primary">
                         {"Forgot?"}
                       </Link>

@@ -1,3 +1,22 @@
+export const setConvosToStore = (state, conversations) => {
+  const convosMap = {}
+  const newState = state.map(convo => {
+    convosMap[convo.id] = convo
+    const convoCopy = { ...convo }
+    return convoCopy
+  })
+
+  conversations.forEach(convo => {
+    if (Object.keys(convosMap).includes(convo.id.toString())) {
+      newState[newState.indexOf(convosMap[convo.id])] = convo
+    } else {
+      newState.push(convo)
+    }
+  })
+
+  return newState
+}
+
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
@@ -81,3 +100,16 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const changeConvoTypingStatus = (state, payload) => {
+  const { sender, isTyping } = payload
+  return state.map(convo => {
+    if (convo.otherUser.id === sender.id) {
+      const convoCopy = { ...convo }
+      convoCopy.typingStatus = isTyping
+      return convoCopy
+    } else {
+      return convo
+    }
+  })
+}

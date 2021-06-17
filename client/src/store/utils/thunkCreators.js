@@ -84,7 +84,7 @@ const sendMessage = (data, body) => {
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => async (dispatch, getState) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
 

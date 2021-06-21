@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const onlineUsers = require("../../onlineUsers");
 
 const getUnreadMessages = (convo) => {
-  const unreadMessages = 0
+  let unreadMessages = 0
   for (let i = convo.messages.length - 1; i > 0; i--) {
     let message = convo.messages[i]
     if (message.unread && message.senderId === convo.otherUser.id) {

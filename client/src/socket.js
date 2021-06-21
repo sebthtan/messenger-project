@@ -19,7 +19,8 @@ socket.on("connect", () => {
     store.dispatch(removeOfflineUser(id));
   });
   socket.on("new-message", (data) => {
-    store.dispatch(setNewMessage(data.message, data.sender));
+    const activeConvo = store.getState().activeConversation
+    store.dispatch(setNewMessage(data.message, data.sender, activeConvo));
   });
 });
 

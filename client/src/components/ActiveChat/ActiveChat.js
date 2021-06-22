@@ -26,6 +26,7 @@ const ActiveChat = (props) => {
   const classes = useStyles();
   const { user } = props;
   const conversation = props.conversation || {};
+  const messages = conversation.messages || []
   const activeConversation = useSelector(state => state.activeConversation)
   const dispatch = useDispatch()
 
@@ -33,7 +34,7 @@ const ActiveChat = (props) => {
     if (conversation.otherUser) {
       dispatch(markAsRead(conversation.otherUser.id))
     }
-  }, [activeConversation, conversation.latestMessageText])
+  }, [activeConversation, messages.length])
 
   return (
     <Box className={classes.root}>

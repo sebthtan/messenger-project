@@ -13,6 +13,7 @@ const getUnreadMessages = (convo) => {
       return unreadMessages
     }
   }
+  // this return is needed for new conversations
   return unreadMessages
 }
 

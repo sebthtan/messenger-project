@@ -5,14 +5,15 @@ const onlineUsers = require("../../onlineUsers");
 
 const getUnreadMessages = (convo) => {
   let unreadMessages = 0
-  for (let i = convo.messages.length - 1; i > 0; i--) {
-    let message = convo.messages[i]
-    if (message.unread && message.senderId === convo.otherUser.id) {
-      unreadMessages++
-      continue
+  for (let i = convo.messages.length - 1; i >= 0; i--) {
+    const message = convo.messages[i]
+    if (message.senderId === convo.otherUser.id && message.unread) {
+      unreadMessages++;
+    } else {
+      return unreadMessages
     }
-    return unreadMessages
   }
+  return unreadMessages
 }
 
 // get all conversations for a user, include latest message text for preview, and all messages
@@ -83,14 +84,14 @@ router.get("/", async (req, res, next) => {
       // set property for latest message preview
       convoJSON.latestMessageText = convoJSON.messages[convoJSON.messages.length - 1].text;
       conversations[i] = convoJSON;
-
+      
       // set property for notification count
       convoJSON.unreadCounter = getUnreadMessages(convoJSON)
     }
-
+    
     // sort conversations so that most recently modified conversations appear at the top
     conversations.sort((a, b) => b.messages[b.messages.length - 1].createdAt - a.messages[a.messages.length - 1].createdAt)
-
+    
     res.json(conversations);
   } catch (error) {
     next(error);

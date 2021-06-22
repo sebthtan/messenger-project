@@ -30,10 +30,10 @@ const ActiveChat = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (conversation.otherUser && conversation.unreadCounter && conversation.unreadCounter > 0) {
+    if (conversation.otherUser) {
       dispatch(markAsRead(conversation.otherUser.id))
     }
-  }, [activeConversation, conversation.unreadCounter])
+  }, [activeConversation, conversation.latestMessageText])
 
   return (
     <Box className={classes.root}>

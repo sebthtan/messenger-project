@@ -17,6 +17,8 @@ export const fetchUser = () => async (dispatch) => {
     const { data } = await axios.get("/auth/user");
     dispatch(gotUser(data));
     if (data.id) {
+      // establishing socket connection
+      socket.connect()
       socket.emit("go-online", data.id);
     }
   } catch (error) {
@@ -30,6 +32,8 @@ export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials);
     dispatch(gotUser(data));
+    // establishing socket connection
+    socket.connect()
     socket.emit("go-online", data.id);
   } catch (error) {
     console.error(error);
@@ -41,6 +45,8 @@ export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials);
     dispatch(gotUser(data));
+    // establishing socket connection
+    socket.connect()
     socket.emit("go-online", data.id);
   } catch (error) {
     console.error(error);
@@ -52,6 +58,7 @@ export const logout = (id) => async (dispatch) => {
   try {
     await axios.delete("/auth/logout");
     dispatch(gotUser({}));
+    // terminate socket connection
     socket.emit("logout", id);
   } catch (error) {
     console.error(error);
@@ -99,6 +106,14 @@ export const postMessage = (body) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const changeTypingStatus = (sender, recipientId, isTyping) => async (dispatch) => {
+  socket.emit('typing-status', {
+    sender,
+    recipientId,
+    isTyping,
+  })
+}
 
 export const searchUsers = (searchTerm) => async (dispatch) => {
   try {

@@ -4,9 +4,12 @@ import {
   setNewMessage,
   removeOfflineUser,
   addOnlineUser,
+  displayTypingStatus,
 } from "./store/conversations";
 
-const socket = io(window.location.origin);
+// autoConnect set to false so that the connection is not established immediately.
+// Connection will be manually established using socket.connect() in login/register thunks.
+const socket = io(window.location.origin, { autoConnect: false });
 
 socket.on("connect", () => {
   console.log("connected to server");
@@ -18,10 +21,15 @@ socket.on("connect", () => {
   socket.on("remove-offline-user", (id) => {
     store.dispatch(removeOfflineUser(id));
   });
+
   socket.on("new-message", (data) => {
     const activeConvo = store.getState().activeConversation
     store.dispatch(setNewMessage(data.message, data.sender, activeConvo));
   });
+
+  socket.on('typing-status', (data) => {
+    store.dispatch(displayTypingStatus(data.sender, data.isTyping))
+  })
 });
 
 export default socket;

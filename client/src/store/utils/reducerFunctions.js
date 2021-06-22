@@ -117,6 +117,19 @@ export const markStoreMessagesRead = (state, recipientId) => {
       const convoCopy = { ...convo }
       convoCopy.messages.forEach(message => message.unread = false)
       convoCopy.unreadCounter = 0
+        return convoCopy
+    } else {
+      return convo
+    }
+  })
+}
+
+export const changeConvoTypingStatus = (state, payload) => {
+  const { sender, isTyping } = payload
+  return state.map(convo => {
+    if (convo.otherUser.id === sender.id) {
+      const convoCopy = { ...convo }
+      convoCopy.typingStatus = isTyping
       return convoCopy
     } else {
       return convo

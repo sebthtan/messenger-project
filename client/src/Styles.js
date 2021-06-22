@@ -46,7 +46,7 @@ const useStyles = makeStyles({
     },
     formMessage: {
         fontWeight: 900,
-        ['@media (max-width:600px)']: {
+        '@media (max-width:600px)': {
             textAlign: 'center',
         },
     },
@@ -73,17 +73,17 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         width: '80%',
-        ['@media (max-width:750px)']: {
+        '@media (max-width:750px)': {
             width: '100%',
         },
     },
     redirectHeader: {
         alignItems: 'center',
-        ['@media (max-width:750px)']: {
+        '@media (max-width:750px)': {
             flexDirection: 'column',
             justifyContent: 'center',
         },
-        ['@media (min-width:750px)']: {
+        '@media (min-width:750px)': {
             justifyContent: 'flex-end',
         }
     },

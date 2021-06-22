@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -7,7 +7,6 @@ import {
   Button,
   FormControl,
   TextField,
-  FormHelperText,
   Hidden,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
@@ -18,7 +17,6 @@ import HomeSideBanner from "./components/HomeSideBanner/HomeSideBanner";
 const Login = (props) => {
   const history = useHistory();
   const { user, register } = props;
-  const [formErrorMessage, setFormErrorMessage] = useState({});
   const classes = useStyles()
 
   const handleRegister = async (event) => {
@@ -72,7 +70,7 @@ const Login = (props) => {
                 className={classes.input}
               />
             </FormControl>
-            <FormControl margin='normal' className={classes.full} error={!!formErrorMessage.confirmPassword}>
+            <FormControl margin='normal' className={classes.full}>
               <TextField
                 aria-label="password"
                 label="Password"
@@ -81,9 +79,6 @@ const Login = (props) => {
                 name="password"
                 className={classes.input}
               />
-              <FormHelperText>
-                {formErrorMessage.confirmPassword}
-              </FormHelperText>
             </FormControl>
             <Button
               type="submit"

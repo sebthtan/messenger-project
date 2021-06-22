@@ -4,6 +4,7 @@ import {
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
   addMessageToStore,
+  markStoreMessagesRead,
   changeConvoTypingStatus,
   setConvosToStore,
 } from "./utils/reducerFunctions";
@@ -17,6 +18,7 @@ const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
+const MARK_AS_READ = 'MARK_AS_READ'
 const SET_TYPING_STATUS = 'SET_TYPING_STATUS'
 
 // ACTION CREATORS
@@ -28,10 +30,10 @@ export const gotConversations = (conversations) => {
   };
 };
 
-export const setNewMessage = (message, sender) => {
+export const setNewMessage = (message, sender, activeConvo) => {
   return {
     type: SET_MESSAGE,
-    payload: { message, sender: sender || null },
+    payload: { message, sender: sender || null, activeConvo },
   };
 };
 
@@ -77,6 +79,14 @@ export const addConversation = (recipientId, newMessage) => {
   };
 };
 
+export const markMessagesAsRead = (recipientId) => {
+  return {
+    type: MARK_AS_READ,
+    payload: recipientId
+  }
+}
+
+
 // REDUCER
 
 const reducer = (state = [], action) => {
@@ -101,6 +111,8 @@ const reducer = (state = [], action) => {
         action.payload.recipientId,
         action.payload.newMessage
       );
+    case MARK_AS_READ:
+      return markStoreMessagesRead(state, action.payload)
     case SET_TYPING_STATUS:
       return changeConvoTypingStatus(state, action.payload)
     default:

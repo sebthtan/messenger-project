@@ -28,7 +28,7 @@ router.post("/register", async (req, res, next) => {
     );
     res.status(202)
       .cookie('token', token, {
-        expires: new Date(Math.floor(Date.now() / 1000) + 86400),
+        maxAge: 86400000,
         httpOnly: true,
       })
       .send({ ...user.dataValues })

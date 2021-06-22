@@ -3,6 +3,20 @@ const { User, Conversation, Message } = require("../../db/models");
 const { Op } = require("sequelize");
 const onlineUsers = require("../../onlineUsers");
 
+const getUnreadMessages = (convo) => {
+  let unreadMessages = 0
+  for (let i = convo.messages.length - 1; i >= 0; i--) {
+    const message = convo.messages[i]
+    if (message.senderId === convo.otherUser.id && message.unread) {
+      unreadMessages++;
+    } else {
+      return unreadMessages
+    }
+  }
+  // this return is needed for new conversations
+  return unreadMessages
+}
+
 // get all conversations for a user, include latest message text for preview, and all messages
 // include other user model so we have info on username/profile pic (don't include current user info)
 // TODO: for scalability, implement lazy loading
@@ -68,14 +82,17 @@ router.get("/", async (req, res, next) => {
         convoJSON.otherUser.online = false;
       }
 
-      // set properties for notification count and latest message preview
+      // set property for latest message preview
       convoJSON.latestMessageText = convoJSON.messages[convoJSON.messages.length - 1].text;
       conversations[i] = convoJSON;
+      
+      // set property for notification count
+      convoJSON.unreadCounter = getUnreadMessages(convoJSON)
     }
-
+    
     // sort conversations so that most recently modified conversations appear at the top
     conversations.sort((a, b) => b.messages[b.messages.length - 1].createdAt - a.messages[a.messages.length - 1].createdAt)
-
+    
     res.json(conversations);
   } catch (error) {
     next(error);

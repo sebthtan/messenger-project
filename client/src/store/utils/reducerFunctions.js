@@ -18,7 +18,7 @@ export const setConvosToStore = (state, conversations) => {
 }
 
 export const addMessageToStore = (state, payload) => {
-  const { message, sender } = payload;
+  const { message, sender, activeConvo } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
   if (sender !== null) {
     const newConvo = {
@@ -26,7 +26,13 @@ export const addMessageToStore = (state, payload) => {
       otherUser: sender,
       messages: [message],
     };
+
+    if (message.senderId === newConvo.otherUser.id) {
+      newConvo.unreadCounter = 1;
+    }
+
     newConvo.latestMessageText = message.text;
+
     return [newConvo, ...state];
   }
 
@@ -35,6 +41,10 @@ export const addMessageToStore = (state, payload) => {
       const convoCopy = { ...convo };
       convoCopy.messages.push(message);
       convoCopy.latestMessageText = message.text;
+
+      if (message.senderId === convoCopy.otherUser.id && activeConvo !== convoCopy.otherUser.username) {
+        convoCopy.unreadCounter++;
+      }
 
       return convoCopy;
     } else {
@@ -100,6 +110,19 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+export const markStoreMessagesRead = (state, recipientId) => {
+  return state.map(convo => {
+    if (convo.otherUser.id === recipientId) {
+      const convoCopy = { ...convo }
+      convoCopy.messages.forEach(message => message.unread = false)
+      convoCopy.unreadCounter = 0
+        return convoCopy
+    } else {
+      return convo
+    }
+  })
+}
 
 export const changeConvoTypingStatus = (state, payload) => {
   const { sender, isTyping } = payload

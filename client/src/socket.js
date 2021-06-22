@@ -23,7 +23,8 @@ socket.on("connect", () => {
   });
 
   socket.on("new-message", (data) => {
-    store.dispatch(setNewMessage(data.message, data.sender));
+    const activeConvo = store.getState().activeConversation
+    store.dispatch(setNewMessage(data.message, data.sender, activeConvo));
   });
 
   socket.on('typing-status', (data) => {
